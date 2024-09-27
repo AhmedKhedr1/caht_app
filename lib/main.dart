@@ -1,5 +1,6 @@
 import 'package:chatapp/firebase_options.dart';
 import 'package:chatapp/screens/Chat_screen.dart';
+import 'package:chatapp/screens/Cubits/Register_Cubit/register_cubit.dart';
 import 'package:chatapp/screens/Cubits/login_cubit/login_cubit.dart';
 import 'package:chatapp/screens/Login_Screen.dart';
 import 'package:chatapp/screens/register_Screen.dart';
@@ -20,8 +21,15 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => LoginCubit(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => LoginCubit(),
+        ),
+        BlocProvider(
+          create: (context) => RegisterCubit(),
+        ),
+      ],
       child: MaterialApp(
         routes: {
           LoginScreen.id: (context) => LoginScreen(),
@@ -29,7 +37,7 @@ class MyApp extends StatelessWidget {
           ChatScreen.id: (context) => ChatScreen(),
         },
         debugShowCheckedModeBanner: false,
-        home: LoginScreen(),
+        initialRoute: LoginScreen.id,
       ),
     );
   }

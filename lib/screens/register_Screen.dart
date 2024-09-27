@@ -7,8 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
-class SigninScreen extends StatelessWidget {
-  SigninScreen({super.key});
+class registerScreen extends StatelessWidget {
+  registerScreen({super.key});
   static String id = 'LoginScreen';
   String? Email;
   String? password;
@@ -60,7 +60,7 @@ class SigninScreen extends StatelessWidget {
                   height: 15,
                 ),
                 Custom_textField(
-                  obscure: true,
+                  obscureText: true,
                   hintText: 'Password',
                   oncahanged: (data) {
                     password = data;

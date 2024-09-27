@@ -9,5 +9,4 @@ class Massege{
 factory Massege.fromjson(jsondata){
   return Massege(jsondata[KMassege],jsondata['id']);
 }
-
 }

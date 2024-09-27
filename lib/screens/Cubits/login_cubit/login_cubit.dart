@@ -19,7 +19,9 @@ class LoginCubit extends Cubit<LoginState> {
        emit(LoginFailure(errorMassege: 'user-not-found'));
       } else if (e.code == 'wrong-password') {
         emit(LoginFailure(errorMassege: 'wrong-password'));
-      }
+      } else {
+      emit(LoginFailure(errorMassege: 'Login failed'));
+    } 
     } on Exception catch (e) {
       emit(LoginFailure(errorMassege: 'there was an error '));
     }

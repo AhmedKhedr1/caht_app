@@ -4,7 +4,6 @@ import 'package:chatapp/models/showSnackBar.dart';
 import 'package:chatapp/screens/Chat_screen.dart';
 import 'package:chatapp/screens/Cubits/login_cubit/login_cubit.dart';
 import 'package:chatapp/screens/register_Screen.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
@@ -28,7 +27,8 @@ class LoginScreen extends StatelessWidget {
           Navigator.pushNamed(context, ChatScreen.id);
           isLoading=false;
         } else if (state is LoginFailure) {
-          showSnackBar(context, 'there was an error ');
+          showSnackBar(context, state.errorMassege);
+          isLoading=false;
         }
       },
       builder:(context,State)=> ModalProgressHUD(
@@ -129,10 +129,5 @@ class LoginScreen extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  Future<void> login_user() async {
-    final credential = await FirebaseAuth.instance
-        .signInWithEmailAndPassword(email: Email!, password: Password!);
   }
 }

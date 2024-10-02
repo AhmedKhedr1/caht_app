@@ -2,6 +2,7 @@ import 'package:chatapp/Widgets/Custom_TextField.dart';
 import 'package:chatapp/Widgets/Custom_button.dart';
 import 'package:chatapp/models/showSnackBar.dart';
 import 'package:chatapp/screens/Chat_screen.dart';
+import 'package:chatapp/screens/Cubits/caht_cubit/chat_cubit.dart';
 import 'package:chatapp/screens/Cubits/login_cubit/login_cubit.dart';
 import 'package:chatapp/screens/register_Screen.dart';
 import 'package:flutter/material.dart';
@@ -24,7 +25,8 @@ class LoginScreen extends StatelessWidget {
         if (state is LoginLoading) {
           isLoading = true;
         } else if (state is LoginSuccess) {
-          Navigator.pushNamed(context, ChatScreen.id);
+          BlocProvider.of<ChatCubit>(context).getmessage();
+          Navigator.pushNamed(context, ChatScreen.id,arguments: Email);
           isLoading=false;
         } else if (state is LoginFailure) {
           showSnackBar(context, state.errorMassege);

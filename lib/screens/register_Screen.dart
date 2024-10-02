@@ -1,10 +1,8 @@
 import 'package:chatapp/Widgets/Custom_TextField.dart';
 import 'package:chatapp/Widgets/Custom_button.dart';
 import 'package:chatapp/models/showSnackBar.dart';
-
 import 'package:chatapp/screens/Cubits/Register_Cubit/register_cubit.dart';
 import 'package:chatapp/screens/Login_Screen.dart';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

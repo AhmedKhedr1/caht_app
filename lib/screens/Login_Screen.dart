@@ -1,7 +1,7 @@
-import 'package:chatapp/Features/cubit/auth_cubit.dart';
 import 'package:chatapp/Widgets/Custom_TextField.dart';
 import 'package:chatapp/Widgets/Custom_button.dart';
 import 'package:chatapp/models/showSnackBar.dart';
+import 'package:chatapp/screens/Auth_bloc/auth_bloc.dart';
 import 'package:chatapp/screens/Chat_screen.dart';
 import 'package:chatapp/screens/Cubits/caht_cubit/chat_cubit.dart';
 
@@ -20,7 +20,7 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<AuthCubit, AuthState>(
+    return BlocConsumer<AuthBloc, AuthState>(
       listener: (context, state) {
         if (state is LoginLoading) {
           isLoading = true;
@@ -94,8 +94,7 @@ class LoginScreen extends StatelessWidget {
                         buttontext: 'Log in',
                         onTap: () async {
                           if (formKey.currentState!.validate()) {
-                            BlocProvider.of<AuthCubit>(context)
-                                .login_user(Email: Email!, Password: Password!);
+                            BlocProvider.of<AuthBloc>(context).add(loginEvent(email: Email!, password: Password!));
                           }
                         },
                       ),

@@ -1,7 +1,8 @@
+import 'package:chatapp/Features/cubit/auth_cubit.dart';
 import 'package:chatapp/Widgets/Custom_TextField.dart';
 import 'package:chatapp/Widgets/Custom_button.dart';
 import 'package:chatapp/models/showSnackBar.dart';
-import 'package:chatapp/screens/Cubits/Register_Cubit/register_cubit.dart';
+
 import 'package:chatapp/screens/Login_Screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -18,7 +19,7 @@ class registerScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<RegisterCubit, RegisterState>(
+    return BlocConsumer<AuthCubit, AuthState>(
       listener: (context, state) {
         if (state is RegisterLoading) {
           isLoading = true;
@@ -93,7 +94,7 @@ class registerScreen extends StatelessWidget {
                             buttontext: 'Sign in ',
                             onTap: () async {
                               if (formKey.currentState!.validate()) {
-                                BlocProvider.of<RegisterCubit>(context)
+                                BlocProvider.of<AuthCubit>(context)
                                     .Create_user(context,
                                         Email: Email!, password: password!);
                               }

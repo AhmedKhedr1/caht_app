@@ -1,9 +1,10 @@
+import 'package:chatapp/Features/cubit/auth_cubit.dart';
 import 'package:chatapp/Widgets/Custom_TextField.dart';
 import 'package:chatapp/Widgets/Custom_button.dart';
 import 'package:chatapp/models/showSnackBar.dart';
 import 'package:chatapp/screens/Chat_screen.dart';
 import 'package:chatapp/screens/Cubits/caht_cubit/chat_cubit.dart';
-import 'package:chatapp/screens/Cubits/login_cubit/login_cubit.dart';
+
 import 'package:chatapp/screens/register_Screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -19,21 +20,20 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-    return BlocConsumer<LoginCubit, LoginState>(
+    return BlocConsumer<AuthCubit, AuthState>(
       listener: (context, state) {
         if (state is LoginLoading) {
           isLoading = true;
         } else if (state is LoginSuccess) {
           BlocProvider.of<ChatCubit>(context).getmessage();
-          Navigator.pushNamed(context, ChatScreen.id,arguments: Email);
-          isLoading=false;
+          Navigator.pushNamed(context, ChatScreen.id, arguments: Email);
+          isLoading = false;
         } else if (state is LoginFailure) {
           showSnackBar(context, state.errorMassege);
-          isLoading=false;
+          isLoading = false;
         }
       },
-      builder:(context,State)=> ModalProgressHUD(
+      builder: (context, State) => ModalProgressHUD(
         inAsyncCall: isLoading,
         child: Scaffold(
           backgroundColor: const Color(0xff274460),
@@ -94,7 +94,7 @@ class LoginScreen extends StatelessWidget {
                         buttontext: 'Log in',
                         onTap: () async {
                           if (formKey.currentState!.validate()) {
-                            BlocProvider.of<LoginCubit>(context)
+                            BlocProvider.of<AuthCubit>(context)
                                 .login_user(Email: Email!, Password: Password!);
                           }
                         },
